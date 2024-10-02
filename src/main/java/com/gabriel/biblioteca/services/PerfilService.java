@@ -1,6 +1,7 @@
 package com.gabriel.biblioteca.services;
 
 import com.gabriel.biblioteca.models.Perfil;
+import com.gabriel.biblioteca.models.exceptions.ObjetoNaoEncontradoException;
 import com.gabriel.biblioteca.repositories.PerfilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class PerfilService {
 
 
     public Perfil getById(long id){
-        return repo.findById(id).orElse(null);
+        return repo.findById(id).orElseThrow(() -> new ObjetoNaoEncontradoException("Perfil não encontrado!"));
     }
 
     public List<Perfil> getAll(){

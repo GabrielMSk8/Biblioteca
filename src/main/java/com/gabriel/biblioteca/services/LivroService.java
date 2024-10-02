@@ -2,6 +2,7 @@ package com.gabriel.biblioteca.services;
 
 
 import com.gabriel.biblioteca.models.Livro;
+import com.gabriel.biblioteca.models.exceptions.ObjetoNaoEncontradoException;
 import com.gabriel.biblioteca.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class LivroService {
 
 
     public Livro getById(long id){
-        return repo.findById(id).orElse(null);
+        return repo.findById(id).orElseThrow(() -> new ObjetoNaoEncontradoException("Livro não encontrado!"));
     }
 
     public List<Livro> getAll(){

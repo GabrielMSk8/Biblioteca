@@ -1,6 +1,7 @@
 package com.gabriel.biblioteca.services;
 
 import com.gabriel.biblioteca.models.Autor;
+import com.gabriel.biblioteca.models.exceptions.ObjetoNaoEncontradoException;
 import com.gabriel.biblioteca.repositories.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public class AutorService {
     private AutorRepository repo;
 
     public Autor getById(long id){
-        return repo.findById(id).orElse(null);
+        return repo.findById(id).orElseThrow(() -> new ObjetoNaoEncontradoException("Autor não encontrado!") );
     }
 
     public List<Autor> getAll(){
